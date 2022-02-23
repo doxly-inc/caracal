@@ -318,6 +318,12 @@ module Caracal
         end
       end
 
+      def render_table_row_properties(xml, model, index)
+        xml['w'].trPr do
+          xml['w'].cantSplit if model.cant_split?(index)
+        end
+      end
+
       def render_table(xml, model)
         borders = %w(top left bottom right horizontal vertical).select do |m|
           model.send("table_border_#{ m }_size") > 0
@@ -366,6 +372,7 @@ module Caracal
           rowspan_hash = {}
           model.rows.each_with_index do |row, index|
             xml['w'].tr do
+              render_table_row_properties(xml, model, row_index)
               if model.table_repeat_header > 0
                 if index < model.table_repeat_header
                   xml['w'].trPr do
