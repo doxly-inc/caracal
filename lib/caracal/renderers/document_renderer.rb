@@ -372,7 +372,7 @@ module Caracal
           rowspan_hash = {}
           model.rows.each_with_index do |row, index|
             xml['w'].tr do
-              render_table_row_properties(xml, model, row_index)
+              render_table_row_properties(xml, model, index)
               if model.table_repeat_header > 0
                 if index < model.table_repeat_header
                   xml['w'].trPr do
