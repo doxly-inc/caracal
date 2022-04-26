@@ -26,6 +26,7 @@ module Caracal
           def self.default_relationships
             [
               { target: 'fontTable.xml',  type: :font      },
+              { target: 'header1.xml',    type: :header    },
               { target: 'footer1.xml',    type: :footer    },
               { target: 'numbering.xml',  type: :numbering },
               { target: 'settings.xml',   type: :setting   },
