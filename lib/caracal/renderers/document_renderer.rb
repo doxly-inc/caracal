@@ -31,11 +31,24 @@ module Caracal
               #============= PAGE SETTINGS ==============================
 
               xml['w'].sectPr do
+                # To display same footer in all the pages of document
                 if rel = document.find_relationship('footer1.xml')
                   xml['w'].footerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'default' })
                 end
+                # To display different footer in first the page of document
+                if rel = document.find_relationship('first_page_footer.xml')
+                  xml['w'].footerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'first' })
+                end
+                
+                # To display same header in all the pages of document
                 if rel = document.find_relationship('header1.xml')
                   xml['w'].headerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'default' })
+                end
+                
+                # To display different header in first the page of document
+                if rel = document.find_relationship('first_page_header.xml')
+                  xml['w'].headerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'first' })
+                  xml['w'].titlePg true
                 end
                 xml['w'].pgSz page_size_options
                 xml['w'].pgMar page_margin_options
